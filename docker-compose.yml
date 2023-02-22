@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+    php:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: ${APP_NAME}_php
+        volumes:
+            -   .:/var/www
+        networks:
+            - to-backend-hismith
+
+    nginx:
+        image: nginx:alpine
+        container_name: ${APP_NAME}-nginx
+        ports:
+            - "80:80"
+        volumes:
+            - .:/var/www
+            - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+        networks:
+            - to-backend-hismith
+
+    postgres:
+        image: postgres:12.4
+        container_name: ${APP_NAME}-pgsql
+        volumes:
+            - pgsql-data:/var/lib/postgresql/data
+        environment:
+            POSTGRES_DB: hismith
+            POSTGRES_USER: admin
+            POSTGRES_PASSWORD: admin
+        ports:
+            - "5432:5432"
+        networks:
+            - to-backend-hismith
+
+volumes:
+    pgsql-data:
+        driver: local
+
+networks:
+    to-backend-hismith:
+        driver: bridge
