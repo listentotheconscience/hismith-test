@@ -15,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/getRss', [TestController::class, 'index']);
+Route::get('/articles', [TestController::class, 'getList']);

@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+
+while ! nc -z postgres 5432; do
+  sleep 0.1
+done
+
+>&2 echo "Database is up - executing command"
+
+>&2 echo --- composer install ---
+composer install
+>&2 echo --- php artisan key:generate ---
+php artisan key:generate
+>&2 echo --- php artisan storage:link ---
+php artisan storage:link
+echo --- php artisan migrate ---
+php artisan migrate
+
+echo "--- /usr/bin/supervisord"
+/usr/bin/supervisord

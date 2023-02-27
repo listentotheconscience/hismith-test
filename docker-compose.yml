@@ -5,7 +5,8 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        container_name: ${APP_NAME}_php
+        container_name: ${APP_NAME}-php
+        image: ${APP_NAME}-php
         volumes:
             -   .:/var/www
         networks:
@@ -18,7 +19,7 @@ services:
             - "80:80"
         volumes:
             - .:/var/www
-            - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+            - ./.docker/nginx/conf.d/:/etc/nginx/conf.d/
         networks:
             - to-backend-hismith
 
@@ -33,6 +34,29 @@ services:
             POSTGRES_PASSWORD: admin
         ports:
             - "5432:5432"
+        networks:
+            - to-backend-hismith
+
+    redis:
+        container_name: ${APP_NAME}-redis
+        image: redis:alpine
+        restart: unless-stopped
+        networks:
+            - to-backend-hismith
+
+    php-queue:
+        image: ${APP_NAME}-php
+        container_name: ${APP_NAME}-queue
+        entrypoint: /entrypoint-horizon
+        restart: always
+        command: php -dmemory_limit=512M artisan horizon
+        working_dir: /var/www
+        environment:
+            - DB_HOST=postgres
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - php
         networks:
             - to-backend-hismith
 
