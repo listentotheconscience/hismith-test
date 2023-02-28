@@ -1,0 +1,108 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Hismith's test task OpenAPI documentation",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/articles": {
+            "get": {
+                "tags": [
+                    "Articles"
+                ],
+                "summary": "Get article list",
+                "operationId": "fdc9419941878f7423bed21ef13e92df",
+                "parameters": [
+                    {
+                        "parameter": "sortByPublicationDate",
+                        "name": "sortByPublicationDate",
+                        "in": "query",
+                        "description": "Accept only 'asc' or 'desc'",
+                        "required": false,
+                        "example": "desc"
+                    },
+                    {
+                        "parameter": "fields",
+                        "name": "fields",
+                        "in": "query",
+                        "description": "list of fileds to display",
+                        "required": false
+                    },
+                    {
+                        "parameter": "page",
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ArticleResource"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ArticleResource": {
+                "title": "Article list",
+                "properties": {
+                    "id": {
+                        "description": "Article resource class",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Example title"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Example description"
+                    },
+                    "publication_date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-02-28 13:23:03"
+                    },
+                    "author": {
+                        "type": "string",
+                        "example": "Example Author"
+                    },
+                    "media": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/MediaResource"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "MediaResource": {
+                "properties": {
+                    "url": {
+                        "description": "Media list resource",
+                        "type": "string",
+                        "example": "https://temp-url.exmaple/sample.jpg"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

@@ -17,9 +17,4 @@ class ArticleFilter extends QueryFilter
     {
         $this->builder->filterSortByPublicationDate($value);
     }
-
-    public function fields(array $value): void
-    {
-
-    }
 }

@@ -33,8 +33,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 COPY .docker/entrypoint /entrypoint
 COPY .docker/entrypoint-horizon /entrypoint-horizon
-COPY .docker/horizon.conf /etc/supervisor
-COPY .docker/supervisord.conf /etc/supervisor
+COPY .docker/horizon.conf /etc/supervisor/conf.d
+COPY .docker/supervisord.conf /etc/supervisor/conf.d
 
 RUN chmod +x /entrypoint
 RUN chmod +x /entrypoint-horizon

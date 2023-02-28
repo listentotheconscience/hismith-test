@@ -7,6 +7,8 @@ services:
             dockerfile: Dockerfile
         container_name: ${APP_NAME}-php
         image: ${APP_NAME}-php
+        env_file:
+            - ./.env
         volumes:
             -   .:/var/www
         networks:
@@ -51,8 +53,8 @@ services:
         restart: always
         command: php -dmemory_limit=512M artisan horizon
         working_dir: /var/www
-        environment:
-            - DB_HOST=postgres
+        env_file:
+            - ./.env
         volumes:
             - ./:/var/www
         depends_on:

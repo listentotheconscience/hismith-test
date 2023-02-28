@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Casts\UrlCast;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Media model class
@@ -27,6 +29,12 @@ class Media extends Model
 
     protected $guarded = ['id'];
 
+    protected $hidden = ['id', 'article_id', 'created_at', 'updated_at'];
+
+    protected $casts = [
+        'url' => UrlCast::class
+    ];
+
     /**
      * @return BelongsTo
      */
@@ -34,4 +42,5 @@ class Media extends Model
     {
         return $this->belongsTo(Article::class);
     }
+
 }

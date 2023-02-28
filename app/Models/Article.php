@@ -36,6 +36,14 @@ class Article extends Model
 
     protected $guarded = ['id'];
 
+    protected $fillable = [
+        'id', 'title', 'description', 'publication_date', 'author'
+    ];
+
+    protected $relations = [
+        'media'
+    ];
+
     /**
      * @return HasMany
      */
@@ -52,10 +60,5 @@ class Article extends Model
     public function scopeFilterSortByPublicationDate (Builder $query, string $value): Builder
     {
         return $query->orderBy('publication_date', $value);
-    }
-
-    public function scopeFilterFields(Builder $query, array $value): Builder
-    {
-        $this->makeVisible($value);
     }
 }
