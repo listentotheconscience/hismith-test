@@ -18,14 +18,27 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     libpq-dev \
     libmagickwand-dev \
+    supervisor \
     ghostscript \
+    netcat \
     && pecl install imagick redis xdebug \
     && docker-php-ext-enable imagick redis xdebug \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-configure zip \
     && docker-php-ext-configure pgsql \
-    && docker-php-ext-install -j$(nproc) gd soap iconv pdo pdo_mysql pdo_pgsql pgsql zip mbstring exif \
+    && docker-php-ext-install -j$(nproc) gd soap iconv pdo pdo_pgsql pgsql zip mbstring exif pcntl \
     && docker-php-source delete
 
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+COPY .docker/entrypoint /entrypoint
+COPY .docker/entrypoint-horizon /entrypoint-horizon
+COPY .docker/horizon.conf /etc/supervisor/conf.d
+COPY .docker/supervisord.conf /etc/supervisor/conf.d
+
+RUN chmod +x /entrypoint
+RUN chmod +x /entrypoint-horizon
+ENTRYPOINT [ "/entrypoint" ]
+
 EXPOSE 9000
-CMD ["php-fpm"]
+CMD ["/usr/bin/supervisord"]
