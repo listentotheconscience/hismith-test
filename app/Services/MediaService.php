@@ -7,8 +7,14 @@ use App\Models\Media;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Media service class
+ *
+ * @package App\Services
+ */
 class MediaService
 {
+    /** @var array|string[]  */
     private array $MIMES = [
         'image/png', 'image/jpeg'
     ];

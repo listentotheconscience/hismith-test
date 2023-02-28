@@ -34,12 +34,15 @@ class Article extends Model
 {
     use HasFactory, Filterable;
 
+    /** @var string[]  */
     protected $guarded = ['id'];
 
+    /** @var string[]  */
     protected $fillable = [
         'id', 'title', 'description', 'publication_date', 'author'
     ];
 
+    /** @var string[]  */
     protected $relations = [
         'media'
     ];

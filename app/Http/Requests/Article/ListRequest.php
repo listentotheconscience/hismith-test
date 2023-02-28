@@ -4,6 +4,11 @@ namespace App\Http\Requests\Article;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Article List request class
+ *
+ * @package App\Http\Requests\Article
+ */
 class ListRequest extends FormRequest
 {
     /**

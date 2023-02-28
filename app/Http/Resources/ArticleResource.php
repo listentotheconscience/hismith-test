@@ -65,6 +65,10 @@ class ArticleResource extends JsonResource
         ];
     }
 
+    /**
+     * @param array|null $fields
+     * @return array|null
+     */
     protected function processVisibleFields(?array $fields): ?array
     {
         /** @var Article $this */

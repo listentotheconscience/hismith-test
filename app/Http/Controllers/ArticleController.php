@@ -16,6 +16,11 @@ use Illuminate\Http\Response as HttpResponse;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Article controller class
+ *
+ * @package App\Http\Controllers
+ */
 class ArticleController extends Controller
 {
     /**

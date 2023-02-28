@@ -7,8 +7,17 @@ use GuzzleHttp\TransferStats;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Request log service
+ *
+ * @package App\Services
+ */
 class RequestLogService
 {
+    /**
+     * @param TransferStats $stats
+     * @return Builder|Model
+     */
     public function create(TransferStats $stats): Builder|Model
     {
         return RequestLog::query()->create([

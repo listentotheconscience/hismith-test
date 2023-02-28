@@ -8,8 +8,14 @@ use GuzzleHttp\TransferStats;
 use Psr\Http\Message\StreamInterface;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * RSS service class
+ *
+ * @package App\Services
+ */
 class RssService
 {
+    /** @var string  */
     public const RSS_URL = 'http://static.feed.rbc.ru/rbc/logical/footer/news.rss';
 
     /**
@@ -59,8 +65,6 @@ class RssService
         $mediaService = resolve(MediaService::class);
 
         $data = $this->getRss();
-        $created = 0;
-        $skipped = 0;
         foreach ($data['channel']['item'] as $item) {
             try {
                 $article = $articleService->create([
@@ -72,9 +76,7 @@ class RssService
                 if (isset($item['enclosure'])) {
                     $mediaService->processMedia($item['enclosure'], $article);
                 }
-                $created++;
             } catch (\Exception $e) {
-                $skipped++;
                 continue;
             }
         }

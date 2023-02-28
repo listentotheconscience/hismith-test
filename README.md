@@ -12,3 +12,8 @@ $ crontab -e
 ```cron
 * * * * * docker exec hismith_test-queue php artisan schedule:run 
 ```
+
+#### Документация доступна по адрессу:
+```text
+/api/documentation
+```

@@ -6,6 +6,11 @@ use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Cast to URL class
+ *
+ * @package App\Casts
+ */
 class UrlCast implements CastsAttributes
 {
     /**

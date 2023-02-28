@@ -27,10 +27,13 @@ class Media extends Model
 {
     use HasFactory;
 
+    /** @var string[]  */
     protected $guarded = ['id'];
 
+    /** @var string[]  */
     protected $hidden = ['id', 'article_id', 'created_at', 'updated_at'];
 
+    /** @var string[]  */
     protected $casts = [
         'url' => UrlCast::class
     ];

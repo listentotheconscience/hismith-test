@@ -9,9 +9,16 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 
+/**
+ * Article service class
+ *
+ * @package App\Services
+ */
 class ArticleService
 {
+    /** @var int  */
     public const MAX_ON_PAGE = 10;
+
     /**
      * @param array $body
      * @return Builder|Model

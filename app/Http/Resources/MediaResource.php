@@ -18,6 +18,8 @@ use OpenApi\Annotations as OA;
  *          example="https://temp-url.exmaple/sample.jpg"
  *     )
  * )
+ *
+ * @package App\Http\Resources
  */
 class MediaResource extends JsonResource
 {
